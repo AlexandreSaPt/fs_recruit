@@ -8,8 +8,28 @@
 ### 2
 When we read values from the brake sensor (C1) and the apps (C3) we do not use the most recent reading and use instead a different approach. Explain the approach and why you think it is used.
 
-**Answer:** *Insert answer*
+**Answer:** 
+When reading the values from the brake sensor and the APPS, the program performs a 
+```c++
+        brake_sensor_timer = 0;
+        brake_val = analogRead(BRAKE_SENSOR_PIN);
+        bufferInsert(avgBuffer1, AVG_SAMPLES, brake_val);
+        brake_val = average(avgBuffer1, AVG_SAMPLES);
 
+```
+
+
+```c++
+        int v_apps1 = analogRead(APPS_1_PIN);
+        int v_apps2 = analogRead(APPS_2_PIN);
+
+        bufferInsert(avgBuffer1, AVG_SAMPLES, v_apps1);
+        bufferInsert(avgBuffer2, AVG_SAMPLES, v_apps2);
+
+        v_apps1 = average(avgBuffer1, AVG_SAMPLES);
+        v_apps2 = average(avgBuffer2, AVG_SAMPLES);
+        sendAPPS(v_apps1,v_apps2);
+```
 
 ### 3
 Check out the R2D(Ready To Drive) code on the C3 state machine. In the condition below we use a timer (R2DTimer) to check the brake was engaged instead of just checking the brake pressure received from can, why?
