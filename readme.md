@@ -9,9 +9,21 @@
 When we read values from the brake sensor (C1) and the apps (C3) we do not use the most recent reading and use instead a different approach. Explain the approach and why you think it is used.
 
 **Answer:** 
-When reading the values from the brake sensor and the APPS, the program performs what is refered in the Brake Light Diagram as "Moving Average". 
+When reading the values from the brake sensor and the APPS, the program performs what is referred in the Brake Light Diagram as "Moving Average".
+![diagram-bl](./diagram-bl.png)
 
+This approach, instead of using the value that is read by the sensors in that moment, it uses the average of a sample (of which size is expressed by the macro AVR_SAMPLE).
+This sample is created using the FIFO principle (a queue). It stores the last (AVR_SAMPLES - 1) samples, adds the value read by the sensor and performs the average. 
+This, I believe, is used to attenuate the occurrence of "spikes" in the data, moments where the value of the sensor could be somewhat wrong. With this, we make sure that there needs to be some corroboration in the data set.
+Here we have the code snippets the read the brake sensor and the APPS respectively, where we can see the code reading from the sensors, inserting it to the buffer that holds the rest of the dataset and performs the average.
+
+**Brake Sensor**
 ```c++
+        #define SENSOR_SAMPLE_PERIOD 20    // ms
+        #define AVG_SAMPLES 20
+
+        ...
+
         brake_sensor_timer = 0;
         brake_val = analogRead(BRAKE_SENSOR_PIN);
         bufferInsert(avgBuffer1, AVG_SAMPLES, brake_val);
@@ -19,8 +31,13 @@ When reading the values from the brake sensor and the APPS, the program performs
 
 ```
 
-
+**APPS**
 ```c++
+        #define APPS_READ_PERIOD_MS 20
+        #define AVG_SAMPLES 5
+
+        ...
+
         int v_apps1 = analogRead(APPS_1_PIN);
         int v_apps2 = analogRead(APPS_2_PIN);
 
@@ -31,6 +48,17 @@ When reading the values from the brake sensor and the APPS, the program performs
         v_apps2 = average(avgBuffer2, AVG_SAMPLES);
         sendAPPS(v_apps1,v_apps2);
 ```
+
+Moreover, I believe the difference in the AVG_SAMPLES is due to a compromised being made, in which, although you want that average, you also want it to be freaking FAST BABY (being aware that the sample period in both is the same)
+
+#define APPS_READ_PERIOD_MS 20
+#define AVG_SAMPLES 5
+
+
+#define SENSOR_SAMPLE_PERIOD 20    // ms
+#define AVG_SAMPLES 20
+
+
 
 ### 3
 Check out the R2D(Ready To Drive) code on the C3 state machine. In the condition below we use a timer (R2DTimer) to check the brake was engaged instead of just checking the brake pressure received from can, why?
