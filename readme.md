@@ -9,7 +9,8 @@
 When we read values from the brake sensor (C1) and the apps (C3) we do not use the most recent reading and use instead a different approach. Explain the approach and why you think it is used.
 
 **Answer:** 
-When reading the values from the brake sensor and the APPS, the program performs a 
+When reading the values from the brake sensor and the APPS, the program performs what is refered in the Brake Light Diagram as "Moving Average". 
+
 ```c++
         brake_sensor_timer = 0;
         brake_val = analogRead(BRAKE_SENSOR_PIN);
