@@ -14,8 +14,11 @@ When reading the values from the brake sensor and the APPS, the program performs
 
 This approach, instead of using the value that is read by the sensors in that moment, it uses the average of a sample (of which size is expressed by the macro AVR_SAMPLE).
 This sample is created using the FIFO principle (a queue). It stores the last (AVR_SAMPLES - 1) samples, adds the value read by the sensor and performs the average. 
-This, I believe, is used to attenuate the occurrence of "spikes" in the data, moments where the value of the sensor could be somewhat wrong. With this, we make sure that there needs to be some corroboration in the data set.
-Here we have the code snippets the read the brake sensor and the APPS respectively, where we can see the code reading from the sensors, inserting it to the buffer that holds the rest of the dataset and performs the average.
+This, I believe, is used to attenuate the occurrence of "spikes" in the data, moments where the value of the sensor could be somewhat wrong. With this, we make sure that there is some corroboration in the data set.
+Here we have the code snippets that read the brake sensor and the APPS respectively, where we can see the code reading from the sensors, inserting it to the buffer that holds the rest of the dataset and finally performing the average.
+
+
+
 
 **Brake Sensor**
 ```c++
@@ -48,15 +51,12 @@ Here we have the code snippets the read the brake sensor and the APPS respective
         v_apps2 = average(avgBuffer2, AVG_SAMPLES);
         sendAPPS(v_apps1,v_apps2);
 ```
+**Dúvidas se incluo ou não**
 
-Moreover, I believe the difference in the AVG_SAMPLES is due to a compromised being made, in which, although you want that average, you also want it to be freaking FAST BABY (being aware that the sample period in both is the same)
+*However, with this approach, you might loose some of the rate of change of what is actually happening with the car. So, there is some tradeoffs to be made with this. So, although both software has the same sample period for the same AVG_SAMPLES, the APPS is more prone to fast*
 
-#define APPS_READ_PERIOD_MS 20
-#define AVG_SAMPLES 5
-
-
-#define SENSOR_SAMPLE_PERIOD 20    // ms
-#define AVG_SAMPLES 20
+*//fazer a ligação entre isto e o resto da resposta / pergunta
+Moreover, I believe the difference in the AVG_SAMPLES is due to a compromised being made, in which, although you want that average, you also want it to be freaking FAST BABY (being aware that the sample period in both is the same)*
 
 
 
