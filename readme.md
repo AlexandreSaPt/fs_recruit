@@ -37,7 +37,7 @@ Here we have the code snippets that read the brake sensor and the APPS respectiv
 
 **APPS**
 ```c++
-        #define APPS_READ_PERIOD_MS 20
+        #define APPS_READ_PERIOD_MS 20      // ms
         #define AVG_SAMPLES 5
 
         ...
@@ -75,6 +75,11 @@ Check out the R2D(Ready To Drive) code on the C3 state machine. In the condition
 ```
 
 **Answer:** *Insert answer*
+
+**In the documentation of Bounce2**
+*bool fell()	Returns true if pin signal transitions from high to low since the last update.*
+
+*Quando é que o timer do Brake começa?*
 ### 4
 What is the ID of the can message sent to the bamocar to request torque?
 **Answer:** *Insert answer*
