@@ -10,6 +10,7 @@ When we read values from the brake sensor (C1) and the apps (C3) we do not use t
 
 **Answer:** 
 When reading the values from the brake sensor and the APPS, the program performs what is referred in the Brake Light Diagram as "Moving Average".
+
 ![diagram-bl](./diagram-bl.png)
 
 This approach, instead of using the value that is read by the sensors in that moment, it uses the average of a sample (of which size is expressed by the macro AVR_SAMPLE).
