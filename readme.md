@@ -161,12 +161,17 @@ public:
 
 The first problem I get with this class declaration is the name of the properties. Eventhought the code has comments in front of each property, when we use it in the rest of the code, it will start to be difficult to understand the code without the constant need to check for this declaration. So, I'll begin be changing their names to a more "readable" one. Also, there is a property with a comment saying it isn't used anymore and doesn't appear in the rest of the code, so I will be removing it. I also believe that there should be comment in from of each property specifying the units of the reading of each sensor and also the reading interval. Since I don't know those values in the context of this class, I will not be putting any of those in my example.
 
+Moreover, the *updateprint()* method has a lot of things I'd like to address.
+To start with, the pin number in the *analogRead()* function have 2 issues for me. It is not explicit what those numbers are and, in case you want to change them in the future, you would have to go after what numbers you would have to change, which not only in unnecessary work but it also makes it easier to mess up. So, to correct it, I would create some macros with the pin number. I will be naming them in uppercase since it is common practice when declaring values that don't change during execution.
 
 
 
-pin number
-    Não é facil de ler
-    se mudar algum, temos que andar atrás a mudar tudo
+
+
+
+pin number -------------------------
+    Não é facil de ler-----------------------------------
+    se mudar algum, temos que andar atrás a mudar tudo--------------------------
 
 pessimo nome de variáveis -------------------
     à frente colocar a escala em que lêm e o intervalo--------------
