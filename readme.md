@@ -190,6 +190,9 @@ nome de updateprint ------------------------
     função update_print se for preciso ---------------------
 
 
+Comentários pelo código
+
+
 e embora aquele constructor seja mais rápido, não adoro tbh (?)
 Childish name of class (?)
 Serial println no final que tá uma merda (?)
