@@ -158,3 +158,81 @@ public:
     }
 };
 ```
+
+The first problem I get with this class declaration is the name of the properties. Eventhought the code has comments in front of each property, when we use it in the rest of the code, it will start to be difficult to understand the code without the constant need to check for this declaration. So, I'll begin be changing their names to a more "readable" one. Also, there is a property with a comment saying it isn't used anymore and doesn't appear in the rest of the code, so I will be removing it. I also believe that there should be comment in from of each property specifying the units of the reading of each sensor and also the reading interval. Since I don't know those values in the context of this class, I will not be putting any of those in my example.
+
+
+
+
+pin number
+    Não é facil de ler
+    se mudar algum, temos que andar atrás a mudar tudo
+
+pessimo nome de variáveis -------------------
+    à frente colocar a escala em que lêm e o intervalo--------------
+    old sensor !?!?!?!?--------------
+
+e embora aquele constructor seja mais rápido, não adoro tbh
+
+Nome da função "func"
+nome de updateprint
+    devia haver a função update
+    função print
+    os argumentos são desnecessários
+    função update_print se for preciso
+
+
+Childish name of class (?)
+Serial println no final que tá uma merda (?)
+
+
+
+
+```c++
+// this is a class for my car
+class mycar {
+private:
+    int sensor_reading1; // hydraulic pressure sensor
+    int sensor_reading2; // temperature sensor
+    int sensor_reading3; // humidity sensor
+    int sensor_reading4; // light sensor
+    int sensor_reading5; // sound sensor
+    int sensor_reading6; // distance sensor
+    int sensor_reading7; // accelerometer sensor
+    int sensor_reading8; // gyroscope sensor
+
+    int sensor_reading9; // old sensor, not used anymore
+
+public:
+    mycar() : sensor_reading1(0), sensor_reading2(0), sensor_reading3(0), sensor_reading4(0),
+            sensor_reading5(0), sensor_reading6(0), sensor_reading7(0), sensor_reading8(0) {}
+
+    // Method will update readings by analog reading and print them 
+    void updateprint() {
+        sensor_reading1 = analogRead(0); // pin 0 is connected to the hydraulic pressure sensor
+        sensor_reading2 = analogRead(1); // pin 1 is connected to the temperature sensor
+        sensor_reading3 = analogRead(2); // pin 2 is connected to the humidity sensor
+        sensor_reading4 = analogRead(3); // pin 3 is connected to the light sensor
+        sensor_reading5 = analogRead(4); // pin 4 is connected to the sound sensor
+        sensor_reading6 = analogRead(5); // pin 5 is connected to the distance sensor
+        sensor_reading7 = analogRead(6); // pin 6 is connected to the accelerometer sensor
+        sensor_reading8 = analogRead(7); // pin 7 is connected to the gyroscope sensor
+        func(sensor_reading1, sensor_reading2, sensor_reading3, sensor_reading4, 
+              sensor_reading5, sensor_reading6, sensor_reading7, sensor_reading8);// print the readings
+    }
+
+    // function to print the readings of the sensors
+    void func(int sensor_reading1, int sensor_reading2, int sensor_reading3, int sensor_reading4, 
+              int sensor_reading5, int sensor_reading6, int sensor_reading7, int sensor_reading8) {
+        Serial.print("Sensor Reading 1: "); Serial.println(sensor_reading1);
+        Serial.print("Sensor Reading 2: "); Serial.println(sensor_reading2);
+        Serial.print("Sensor Reading 3: "); Serial.println(sensor_reading3);
+        Serial.print("Sensor Reading 4: "); Serial.println(sensor_reading4);
+        Serial.print("Sensor Reading 5: "); Serial.println(sensor_reading5);
+        Serial.print("Sensor Reading 6: "); Serial.println(sensor_reading6);
+        Serial.print("Sensor Reading 7: "); Serial.println(sensor_reading7);
+        Serial.print("Sensor Reading 8: "); Serial.println(sensor_reading8);
+        //all readings were serial printed
+    }
+};
+```
