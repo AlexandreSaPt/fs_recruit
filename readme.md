@@ -164,6 +164,8 @@ The first problem I get with this class declaration is the name of the propertie
 Moreover, the *updateprint()* method has a lot of things I'd like to address.
 To start with, the pin number in the *analogRead()* function have 2 issues for me. It is not explicit what those numbers are and, in case you want to change them in the future, you would have to go after what numbers you would have to change, which not only in unnecessary work but it also makes it easier to mess up. So, to correct it, I would create some macros with the pin number. I will be naming them in uppercase since it is common practice when declaring values that don't change during execution.
 In this method, we also have 2 things going on inside it: updating and printing. I will start by changing the printing method's name to "printReadings()", since "func" doesn't really tell us much about the function. This time, I don't want this function to have arguments since the arguments where the object's properties and you have access to those already and this way the code becomes more readable. With this done, I would go ahead and crate a new method called "updateReading()", that would take care of the update logic, making it easier to debug if necessary, and add it to the updateprint function, so that it only calls these 2 functions.
+Now regarding the Class Constructor, although I find it somewhat harder to understand, I believe it is because of my lack of experience with it and since it is a faster way to initialize a class, I will leave it there as is, just making some paragraphs and tabs to make it more readable.
+
 
 
 
@@ -193,7 +195,7 @@ nome de updateprint ------------------------
 Comentários pelo código
 
 
-e embora aquele constructor seja mais rápido, não adoro tbh (?)
+e embora aquele constructor seja mais rápido, não adoro tbh (?) ----------------
 Childish name of class (?)
 Serial println no final que tá uma merda (?)
 this-> preferência pessoal
