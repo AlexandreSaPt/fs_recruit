@@ -105,7 +105,9 @@ This may originate a problem since this can be a little time sensitive in the se
 
 ### 4
 What is the ID of the can message sent to the bamocar to request torque?
-**Answer:** *Insert answer*
+**Answer:**
+According to the *CAN Table*, which is present in the Team's Google Drive, we can see a row with the following comment "Torque Request to Bamocar". Therefor, the ID of the CAN message sent to the bamocar to request torque is 0x201.
+
 ### 5 
 The code below is not amazing, tell us some things you would change to improve it, you can write them down in text or correct the code:
 ```c++
