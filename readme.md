@@ -76,7 +76,7 @@ Check out the R2D(Ready To Drive) code on the C3 state machine. In the condition
 
 **Answer:**
 In the if statement above, in order to switch the *R2DStatus* to *DRIVING*, not only has the TS to be on, but the *r2dButton* has to be pressed at the same time as the brakes. For the brakes to "count" as pressed, the value read has to be grater than 165 and regarding the button, the method *fell()* returns if the button signal has gone from LOW to HIGH since the last call of the method *update()*.
-This may originate a problem since this can be a little time sensitive in the sense that the brakes were pressed but when you take your hand off the button, the brake pressure may be now below that threshold. So, in order to remove this "bad timing", the *R2DTimer* along with its *R2D_TIMEOUT* has been implemented. Now, whenever the brake is pressed passed that threshold, the timer (which is an object from the *ElapsedMillis* class) is set to 0, now giving the driver R2D_TIMEOUT milliseconds to press the *r2dButton*.
+This may originate a problem since this can be a little time sensitive in the sense that the brakes were pressed but when you take your hand off the button, the brake pressure may be now below that threshold. So, in order to remove this "bad timing", the *R2DTimer* along with its *R2D_TIMEOUT* has been implemented. Now, whenever the brake is pressed passed that threshold, the timer (which is an object from the *ElapsedMillis* class) is set to 0, now giving the driver R2D_TIMEOUT milliseconds to release the *r2dButton*.
 
 **Resetting the R2DTimer**
 ```c++
