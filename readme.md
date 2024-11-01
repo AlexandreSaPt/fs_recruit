@@ -167,94 +167,84 @@ In this method, we also have 2 things going on inside it: updating and printing.
 Now regarding the Class Constructor, although I find it somewhat harder to understand, I believe it is because of my lack of experience with it and since it is a faster way to initialize a class, I will leave it there as is, just making some paragraphs and tabs to make it more readable.
 Taking a closer look at the now named "printReadings()", being more familiar with the "printf" syntax, the way it is shown does bother me, but couldn't find a better way to do it.
 The one thing that needs now is the comments. With all of the changes that I have made, some comments became redundant and there is also some comments I'd like to put, just to clarify a little bit more. We can use some of the standardized tags for this, just like in your documentation.
-
-
-
-
-
-
-
-
-
-
-pin number -------------------------
-    Não é facil de ler-----------------------------------
-    se mudar algum, temos que andar atrás a mudar tudo--------------------------
-
-pessimo nome de variáveis -------------------
-    à frente colocar a escala em que lêm e o intervalo--------------
-    old sensor !?!?!?!?--------------
-
-
-Nome da função "func" --------------------
-nome de updateprint ------------------------
-    devia haver a função update -----------------
-    função print ---------------------------
-    os argumentos são desnecessários --------------------
-    função update_print se for preciso ---------------------
-
-
-
-
-e embora aquele constructor seja mais rápido, não adoro tbh (?) ----------------
-
-Serial println no final que tá uma merda (?) ---------------------
-
-Comentários pelo código --------------
-
-
-this-> preferência pessoal
-
-Aqueles ifs para DEGUB
-
-
-
-
+Here is the code with the said changes.
 
 ```c++
-// this is a class for my car
+#define HYDRAULIC_PRESSURE_PIN 0
+#define TEMPERATURE_PIN 1
+#define HUMIDITY_PIN 2
+#define LIGHT_PIN 3
+#define SOUND_PIN 4
+#define DISTANCE_PIN 5
+#define ACCELEROMETER_PIN 6
+#define GYROSCOPE_PIN 7
+
+
+/**
+ * @brief This class represents a car and is used to read the values from the sensors and print them to the serial monitor
+*/
+
 class mycar {
 private:
-    int sensor_reading1; // hydraulic pressure sensor
-    int sensor_reading2; // temperature sensor
-    int sensor_reading3; // humidity sensor
-    int sensor_reading4; // light sensor
-    int sensor_reading5; // sound sensor
-    int sensor_reading6; // distance sensor
-    int sensor_reading7; // accelerometer sensor
-    int sensor_reading8; // gyroscope sensor
+    int hydraulic_pressure_sensor; // variable to store the value from the hydraulic pressure sensor
+    int temperature_sensor; // variable to store the value from the temperature sensor
+    int humidity_sensor; // variable to store the value from the humidity sensor
+    int light_sensor; // variable to store the value from the light sensor
+    int sound_sensor; // variable to store the value from the sound sensor
+    int distance_sensor; // variable to store the value from the distance sensor
+    int accelerometer_sensor; // variable to store the value from the accelerometer sensor
+    int gyroscope_sensor; // variable to store the value from the gyroscope sensor
 
-    int sensor_reading9; // old sensor, not used anymore
 
 public:
-    mycar() : sensor_reading1(0), sensor_reading2(0), sensor_reading3(0), sensor_reading4(0),
-            sensor_reading5(0), sensor_reading6(0), sensor_reading7(0), sensor_reading8(0) {}
+    /**
+     * @brief Constructor of new mycar object, initializes all sensor readings to 0
+     */
+    mycar() : 
+        hydraulic_pressure_sensor(0), 
+        temperature_sensor(0), 
+        humidity_sensor(0), 
+        light_sensor(0),
+        sound_sensor(0), 
+        distance_sensor(0), 
+        accelerometer_sensor(0), 
+        gyroscope_sensor(0) 
+        {}
 
-    // Method will update readings by analog reading and print them 
+    /**
+     * @brief Function to update the readings of the sensors and print them to the serial monitor
+     */
     void updateprint() {
-        sensor_reading1 = analogRead(0); // pin 0 is connected to the hydraulic pressure sensor
-        sensor_reading2 = analogRead(1); // pin 1 is connected to the temperature sensor
-        sensor_reading3 = analogRead(2); // pin 2 is connected to the humidity sensor
-        sensor_reading4 = analogRead(3); // pin 3 is connected to the light sensor
-        sensor_reading5 = analogRead(4); // pin 4 is connected to the sound sensor
-        sensor_reading6 = analogRead(5); // pin 5 is connected to the distance sensor
-        sensor_reading7 = analogRead(6); // pin 6 is connected to the accelerometer sensor
-        sensor_reading8 = analogRead(7); // pin 7 is connected to the gyroscope sensor
-        func(sensor_reading1, sensor_reading2, sensor_reading3, sensor_reading4, 
-              sensor_reading5, sensor_reading6, sensor_reading7, sensor_reading8);// print the readings
+        updateReadings();
+        printReadings();
     }
 
-    // function to print the readings of the sensors
-    void func(int sensor_reading1, int sensor_reading2, int sensor_reading3, int sensor_reading4, 
-              int sensor_reading5, int sensor_reading6, int sensor_reading7, int sensor_reading8) {
-        Serial.print("Sensor Reading 1: "); Serial.println(sensor_reading1);
-        Serial.print("Sensor Reading 2: "); Serial.println(sensor_reading2);
-        Serial.print("Sensor Reading 3: "); Serial.println(sensor_reading3);
-        Serial.print("Sensor Reading 4: "); Serial.println(sensor_reading4);
-        Serial.print("Sensor Reading 5: "); Serial.println(sensor_reading5);
-        Serial.print("Sensor Reading 6: "); Serial.println(sensor_reading6);
-        Serial.print("Sensor Reading 7: "); Serial.println(sensor_reading7);
-        Serial.print("Sensor Reading 8: "); Serial.println(sensor_reading8);
+    /**
+     * @brief Function to update the readings of the sensors
+     */
+    void updateReadings(){
+        hydraulic_pressure_sensor = analogRead(HYDRAULIC_PRESSURE_PIN);
+        temperature_sensor = analogRead(TEMPERATURE_PIN);
+        humidity_sensor = analogRead(HUMIDITY_PIN);
+        light_sensor = analogRead(LIGHT_PIN);
+        sound_sensor = analogRead(SOUND_PIN);
+        distance_sensor = analogRead(DISTANCE_PIN);
+        accelerometer_sensor = analogRead(ACCELEROMETER_PIN);
+        gyroscope_sensor = analogRead(GYROSCOPE_PIN);
+    }
+
+    /**
+     * @brief Function to print the readings of the sensors to the serial monitor
+     */
+    void printReadings() {
+        Serial.print("Sensor Reading 1: "); Serial.println(hydraulic_pressure_sensor);
+        Serial.print("Sensor Reading 2: "); Serial.println(temperature_sensor);
+        Serial.print("Sensor Reading 3: "); Serial.println(humidity_sensor);
+        Serial.print("Sensor Reading 4: "); Serial.println(light_sensor);
+        Serial.print("Sensor Reading 5: "); Serial.println(sound_sensor);
+        Serial.print("Sensor Reading 6: "); Serial.println(distance_sensor);
+        Serial.print("Sensor Reading 7: "); Serial.println(accelerometer_sensor);
+        Serial.print("Sensor Reading 8: "); Serial.println(gyroscope_sensor);
         //all readings were serial printed
     }
 };
