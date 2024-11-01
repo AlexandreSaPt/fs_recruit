@@ -95,14 +95,6 @@ This may originate a problem since this can be a little time sensitive in the se
 ```
 
 
-
-**In the documentation of Bounce2**
-*bool fell()	Returns true if pin signal transitions from high to low since the last update.*
-
-*Quando é que o timer do Brake começa?*
-*R2DOverride é pra testes?*
-
-
 ### 4
 What is the ID of the can message sent to the bamocar to request torque?
 **Answer:**
