@@ -52,14 +52,6 @@ Here we have the code snippets that read the brake sensor and the APPS respectiv
         v_apps2 = average(avgBuffer2, AVG_SAMPLES);
         sendAPPS(v_apps1,v_apps2);
 ```
-**Dúvidas se incluo ou não**
-
-*However, with this approach, you might loose some of the rate of change of what is actually happening with the car. So, there is some tradeoffs to be made with this. So, although both software has the same sample period for the same AVG_SAMPLES, the APPS is more prone to fast*
-
-*//fazer a ligação entre isto e o resto da resposta / pergunta
-Moreover, I believe the difference in the AVG_SAMPLES is due to a compromised being made, in which, although you want that average, you also want it to be freaking FAST BABY (being aware that the sample period in both is the same)*
-
-
 
 ### 3
 Check out the R2D(Ready To Drive) code on the C3 state machine. In the condition below we use a timer (R2DTimer) to check the brake was engaged instead of just checking the brake pressure received from can, why?
